@@ -8,11 +8,33 @@ pipeline {
                     sh 'mvn clean compile'
                 }
             }
-     stage('Test With Junit/Mockito') {
+
+     stage('Code Quality') {
             steps {
+                script {
+                    withSonarQubeEnv('SonarQubeServer') {
+                        sh 'mvn sonar:sonar'
+                    }
+                }
+            }
+        }
+          stage('Test With Junit') {
+                    steps {
 
-                    sh "mvn test "
+                            sh "mvn test "
 
+                    }
+                }
+        stage('MOCKITO') {
+            steps {
+                script {
+                    sh 'mvn test'
+                }
+            }
+            post {
+                always {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                }
             }
         }
     }
