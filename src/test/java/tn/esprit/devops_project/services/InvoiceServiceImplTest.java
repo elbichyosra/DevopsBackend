@@ -131,22 +131,7 @@ class InvoiceServiceImplTest {
     }
 
 
-//    @Test
-//    @Transactional
-//    void getTotalAmountInvoiceBetweenDates() {
-//        // Créer des données de test
-//        Date startDate = new Date();
-//        Date endDate = new Date();
-//
-//        // Configurez le mock pour que la méthode getTotalAmountInvoiceBetweenDates renvoie une valeur spécifique
-//        when(invoiceRepository.getTotalAmountInvoiceBetweenDates(startDate, endDate)).thenReturn(100.00f);
-//
-//        // Appel de la méthode
-//        float totalAmount = invoiceService.getTotalAmountInvoiceBetweenDates(startDate, endDate);
-//
-//        // Vérification
-//        assertEquals(100.00f, totalAmount);
-//    }
+
 
 }
 
