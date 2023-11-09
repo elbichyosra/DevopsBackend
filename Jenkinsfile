@@ -22,29 +22,24 @@ pipeline {
             }
 
         }
-     stage('JaCoCo Code Coverage') {
-            steps {
 
-                    sh 'mvn clean test org.jacoco:jacoco-maven-plugin:prepare-agent'
-
-            }
-                post {
-                    success {
-                        jacoco(
-                            execPattern: '**/build/jacoco/*.exec',
-                            classPattern: '**/build/classes/java/main',
-                            sourcePattern: '**/src/main'
-            )
-        }
-    }}
    stage('SonarQube Analysis') {
             steps {
           withSonarQubeEnv('SonarQubeServer') {
     sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonarqube'
 
             }
-
+ sh 'mvn clean test org.jacoco:jacoco-maven-plugin:prepare-agent'
           }
+                      post {
+                              success {
+                                  jacoco(
+                                      execPattern: '**/build/jacoco/*.exec',
+                                      classPattern: '**/build/classes/java/main',
+                                      sourcePattern: '**/src/main'
+                      )
+                  }
+              }
 
         }
 

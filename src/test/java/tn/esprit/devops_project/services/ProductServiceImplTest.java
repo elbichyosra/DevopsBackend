@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import tn.esprit.devops_project.entities.Product;
 import tn.esprit.devops_project.entities.ProductCategory;
 import tn.esprit.devops_project.entities.Stock;
@@ -24,6 +25,7 @@ import java.util.Optional;
 
 
 @ExtendWith(MockitoExtension.class)
+@ActiveProfiles("test")
 class ProductServiceImplTest {
 
     @InjectMocks

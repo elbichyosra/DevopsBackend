@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import tn.esprit.devops_project.entities.Supplier;
 import tn.esprit.devops_project.entities.SupplierCategory;
 import tn.esprit.devops_project.repositories.SupplierRepository;
@@ -19,7 +20,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
-
+@ActiveProfiles("test")
 class SupplierServiceImplTest {
     Supplier supplier = new Supplier(1L,"code1", "label1",SupplierCategory.ORDINAIRE, null, null);
     @Mock
