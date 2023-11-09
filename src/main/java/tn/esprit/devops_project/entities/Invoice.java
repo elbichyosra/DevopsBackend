@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Pattern;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -20,20 +22,27 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class  Invoice implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NonNull
 	Long idInvoice;
+	@NonNull
 	float amountDiscount;
+	@NonNull
 	float amountInvoice;
 	@Temporal(TemporalType.DATE)
+	@Pattern(regexp = "yyyy-mm-dd")
+
 	Date dateCreationInvoice;
 	@Temporal(TemporalType.DATE)
+
+	@Pattern(regexp = "yyyy-mm-dd")
 	Date dateLastModificationInvoice;
+	@NonNull
 	Boolean archived;
 	@OneToMany(mappedBy = "invoice")
 	@JsonIgnore

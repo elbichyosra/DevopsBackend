@@ -39,7 +39,14 @@ public class InvoiceServiceImplMockTest {
 
     @InjectMocks
     private InvoiceServiceImpl invoiceService;
+    @Test
+    void addInvoice() {
+        Invoice invoice = new Invoice(2L, 100.0f, 200.0f ,new Date(2023,9,10), new Date(2023,10,14), false, null, null);
+        Mockito.when(invoiceRepository.save(Mockito.any(Invoice.class))).thenReturn(invoice);
 
+        Invoice invTest=invoiceService.addInvoice(invoice);
+        Assertions.assertNotNull(invTest);
+    }
     @Test
     public void retrieveAllInvoices() {
         // Créez des données de test
@@ -60,7 +67,7 @@ public class InvoiceServiceImplMockTest {
     @Test
     public void retrieveInvoice() {
         Long invoiceId = 1L;
-        Invoice invoice = new Invoice(2L, 100.0f, 200.0f, new Date(2023,9,10), new Date(2023,10,14), false, null, null); // Créez un objet facture factice
+        Invoice invoice = new Invoice(1L, 100.0f, 200.0f, new Date(2023,9,10), new Date(2023,10,14), false, null, null); // Créez un objet facture factice
         when(invoiceRepository.findById(invoiceId)).thenReturn(Optional.of(invoice));
 
         Invoice retrievedInvoice = invoiceService.retrieveInvoice(invoiceId);
@@ -71,7 +78,7 @@ public class InvoiceServiceImplMockTest {
     @Test
     public void cancelInvoice() {
         Long invoiceId = 1L;
-        Invoice invoice = new Invoice(2L, 100.0f, 200.0f ,new Date(2023,9,10), new Date(2023,10,14), false, null, null); // Créez un objet factice
+        Invoice invoice = new Invoice(1L, 100.0f, 200.0f ,new Date(2023,9,10), new Date(2023,10,14), false, null, null); // Créez un objet factice
         when(invoiceRepository.findById(invoiceId)).thenReturn(Optional.of(invoice));
 
         invoiceService.cancelInvoice(invoiceId);
@@ -79,14 +86,7 @@ public class InvoiceServiceImplMockTest {
         assertTrue(invoice.getArchived());
         verify(invoiceRepository).save(invoice);
     }
-    @Test
-    void addInvoice() {
-        Invoice invoice = new Invoice(2L, 100.0f, 200.0f ,new Date(2023,9,10), new Date(2023,10,14), false, null, null);
-        Mockito.when(invoiceRepository.save(Mockito.any(Invoice.class))).thenReturn(invoice);
 
-       Invoice invTest=invoiceService.addInvoice(invoice);
-        Assertions.assertNotNull(invTest);
-    }
 
 
 @Test
@@ -112,7 +112,7 @@ public void getInvoicesBySupplier() {
         Long invoiceId = 2L;
 
         // Créez un objet Invoice factice
-        Invoice mockInvoice = new Invoice(1L, 100.0f, 200.0f, null,null, false, null, null);
+        Invoice mockInvoice = new Invoice(2L, 100.0f, 200.0f, new Date(),new Date(), false, null, null);
 
         // Créez un objet Operator factice
         Operator mockOperator = new Operator(1L,"yosra", "elbich", "yossra123");
