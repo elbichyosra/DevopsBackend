@@ -28,21 +28,19 @@ public class  Invoice implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+	@NonNull
 	Long idInvoice;
-	
+	@NonNull
 	float amountDiscount;
-	
+	@NonNull
 	float amountInvoice;
 	@Temporal(TemporalType.DATE)
-	
-
+	@Pattern(regexp = "yyyy-mm-dd")
 	Date dateCreationInvoice;
 	@Temporal(TemporalType.DATE)
-
-	
+         @Pattern(regexp = "yyyy-mm-dd")
 	Date dateLastModificationInvoice;
-	
+	@NonNull
 	Boolean archived;
 	@OneToMany(mappedBy = "invoice")
 	@JsonIgnore
